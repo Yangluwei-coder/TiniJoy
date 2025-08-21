@@ -1,0 +1,147 @@
+.Nav-grid{
+  width: 75%;
+  max-width: 1200px;
+    margin: 0 auto;
+    height: 85px;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 50px;
+    line-height: 85px;
+    position: relative;
+    font-family: 'Inter', 'Segoe UI', 'Roboto', sans-serif;
+    
+  }
+.Nav-middle{
+    margin-left: 0;
+    display: flex;
+    justify-content: center;
+} 
+.Nav-left{
+  flex:1;
+  /* margin-left: 50px; */
+  font-size: 14px;
+}
+.navleft-style {
+  text-decoration: none;
+  color: black;
+  font-size: 16px;
+  margin-left: 20px;
+}
+.Nav-right{
+  display: flex;
+  justify-content: end;
+} 
+.search-input-container{
+  position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, .2);
+    width: 100%;
+}
+.search-icon{
+  color: inherit;
+    text-decoration: inherit;
+}
+.search-box{
+  position:relative;
+  margin: 6px 6px;
+}
+.close-icon{
+  position: absolute;
+  top: 0rem;
+    right: 2rem;
+    font-size: 0rem;
+    cursor: pointer;
+    text-decoration: none;
+ 
+}
+.search-input{
+  position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, .2);
+    width: 100%;   
+}
+.search-input-container{
+  background-color: #fff;
+    padding: 5rem;
+    display: flex;
+    justify-content: center;
+}
+.field-wrapper{
+  display: flex;
+  justify-content: center;
+}
+.cart-wrapper{
+  margin:6px 6px;
+  
+}
+
+.form-container{
+  height: 150px;
+    background-color: white;
+ 
+}
+.input-setting{
+  width: 80%;
+  height: 50px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin: 36px 10px 36px 10px;
+}
+.grid-container{
+  display: grid;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: 30px;
+}
+.self-center{
+  margin:0;
+}
+.cart-container {
+  display: flex;
+  align-items: center;
+  gap:8px;
+  margin-right: 100px;
+}
+
+.cart-link {
+  color: black;
+  text-decoration: none;
+}
+.cart-icon{
+  width: 25px;
+  height: 25px;
+  stroke: currentColor;
+
+}
+.cart-icon-wrapper {
+  display: flex;
+  align-items: center;
+  gap:6px;
+}
+
+.cart-badge {
+    margin-top: 40px;
+    margin-right:80px;
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background-color: rgb(162, 200, 36);
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

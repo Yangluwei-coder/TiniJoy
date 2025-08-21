@@ -1,0 +1,22 @@
+.Ins-gallery{
+    width: 75%;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 360px;
+    background-color: rgba(248,248,248,255);
+}
+.Button-see-photos{
+    display: flex;
+    justify-content: center;
+    margin:45px auto;
+    background-color: rgb(162, 200, 36);
+    height:25px;
+    width:100px;
+    border-radius: 15px;
+    color:white;
+    font-size: 14px;
+}
+ .img-card:hover {
+  transform: translateY(-5px) scale(1.05);
+  transition: transform 0.3s ease;
+}

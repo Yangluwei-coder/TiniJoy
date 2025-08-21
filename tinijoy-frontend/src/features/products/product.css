@@ -1,0 +1,248 @@
+.breadcrumbstyle{
+  max-width: 1200px;
+  width: 80%;
+  border-radius: 50px;
+  padding: 8px 16px;
+  font-size: 14px;
+  color: darkgrey;
+  border: 1px solid darkgrey;
+  margin: 60px auto;
+}
+.product-wrapper{
+  font-family: 'Inter', sans-serif;
+  padding: 40px;
+  background-color: white;
+  border-radius: 15px;
+  margin:0 auto;
+
+}
+.product-box{
+  width: 80%;
+  max-width:1200px;
+  margin:0 auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+.product-word{
+  width: 50%;
+  max-width:450px;
+}
+.add-button{
+  font-size: 16px;
+  width: 130px;
+  height: 50px;
+  margin-left: 10px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  background-color: rgb(162, 200, 36);
+  color: white;
+}
+.number-button{
+  font-size: 16px;
+  width: 80px;
+  height: 50px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  background-color: rgb(248, 248, 248, 1);
+}
+.product-intro{
+  width: 80%;
+  max-width: 1200px;
+  margin:50px auto;
+  background-color: white;
+  font-family: 'Inter', sans-serif;
+  color: #444;
+}
+.product-detail{
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Inter', sans-serif;
+  height: '450px';
+  width:100%;
+  max-width:1200px;
+  border-radius: 15px;
+  margin:40px auto;
+  gap: 30px;
+  
+}
+.detail-head{
+  font-size: 18px;
+  margin-top:50px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1040px;
+}
+.left-detail{
+  width: 70%;
+  line-height: 1.5;
+}
+.right-form{
+  width: 30%;
+  height: 30%;
+  border: 1px lightgrey solid;
+  border-radius: 20px;
+
+}
+.styled-form {
+  margin:20px;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-family: Arial, sans-serif;
+}
+
+.form-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  padding: 4px 0;
+  font-size: 16px;
+  color: #333;
+  position: relative;
+}
+
+.label, .value {
+  background-color: white; /* 可根据背景色调整 */
+  padding: 0 8px;
+  z-index: 1;
+}
+.cart-popup {
+  font-family: 'Inter', sans-serif;
+  position: fixed;
+  top: 200px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border-radius: 15px;
+  width: 30%;
+  min-height: 360px;
+  max-height: 80vh;
+  overflow-y: auto;
+  z-index: 1001;         
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+.cart-header {
+  font-size: 22px;
+  font-weight: 00;
+  padding:40px 10px 20px 20px;
+  border-bottom: 1px lightgrey solid;
+}
+
+.empty-cart {
+  color: grey;
+  font-size: 16px;
+  margin:90px auto;
+}
+
+.cart-items {
+  padding:20px 10px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-bottom: 1px lightgrey solid;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cart-thumb {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.cart-info {
+  flex-grow: 1;
+}
+
+.cart-remove {
+  font-size: 12px;
+  color: darkred;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-top: 4px;
+}
+
+.cart-qty {
+  font-weight: 500;
+ 
+}
+.number-qty {
+    width: 44px;
+    border-radius: 22px;
+    border: 1px lightgrey solid;
+    padding: 5px;
+    font-size: 19px;
+    text-align: center;
+    background-color: rgb(248, 248, 248, 1);
+}
+
+.cart-subtotal {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  padding:20px 10px 20px 20px;
+}
+
+.checkout-button {
+  width: 80%;
+  margin: 20px auto;
+  border: none;
+  height:50px;
+  border-radius: 25px;
+  background-color: rgb(162, 200, 36);
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.number-input {
+width: 60px;
+  border-radius: 30px;
+  border: 1px darkgray solid;
+  padding: 5px;
+  font-size: 19px;
+  text-align: center;
+}
+.cart-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;         /* 全屏 */
+  height: 100vh;        /* 全屏 */
+  background-color: rgba(0, 0, 0, 0.5); 
+  z-index: 1000;        
+}
+
+/* 右上角关闭按钮 */
+.cart-close {
+  cursor: pointer;
+  font-size: 24px;
+  line-height: 1;
+  user-select: none;
+}
+.cart-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 20px;
+  cursor: pointer;
+  color: #555;
+}
+
+.cart-close:hover {
+  color: black;
+}

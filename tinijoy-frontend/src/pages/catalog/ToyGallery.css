@@ -1,0 +1,68 @@
+.toy-gallery {
+  padding: 40px 5%;
+  background-color: #f8f8f8;
+  font-family: 'Inter', sans-serif;
+}
+
+
+.gallery-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.gallery-header h2 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.see-all {
+  font-size: 14px;
+  color: rgb(162, 200, 36);
+  text-decoration: none;
+  font-weight: 500;
+}
+.see-all:hover {
+  text-decoration: underline;
+}
+.product-wrapper{
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.filter-buttons button {
+  margin-left: 10px;
+  padding: 8px 12px;
+  background-color: #eee;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.filter-buttons button.active {
+  background-color: rgb(162, 200, 36);
+  color: white;
+  font-weight: bold;
+}
+
+.slider-bar {
+  background-color: #ddd;
+  height: 3px;
+  border-radius: 3px;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+.slider-progress {
+  height: 100%;
+  background-color: rgb(162, 200, 36);
+  width: 20%;
+}
+
+.toy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 40px;
+  justify-items: center;
+  max-width:1200px; 
+  margin: 40px 0px; 
+}

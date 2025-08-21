@@ -1,0 +1,90 @@
+.promo-box{
+    width: 100%;
+    background-color: rgba(248,248,248,255);
+    height:250px;
+    display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.promo-section {
+  width:75%;
+  max-width: 1200px;
+  height:100px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  gap:100px;
+}
+
+.promo-left {
+    max-width: 55%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.promo-icon {
+  width: 40px;
+  height: 40px;
+  background-color: rgb(162, 200, 36);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.promo-icon-img {
+  width: 16px;
+  height: 16px;
+}
+
+
+.promo-text {
+  max-width: 260px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.highlight {
+  color: rgb(162, 200, 36);
+}
+
+.promo-right {
+  display: flex;
+  gap: 8px;
+}
+
+.promo-input {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 16px;
+  font-size: 12px;
+  width: 80%;
+  outline: none;
+}
+
+.promo-input:focus {
+  border-color: rgb(162, 200, 36);
+  box-shadow: 0 0 0 2px rgba(162, 200, 36, 0.2);
+}
+
+.promo-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 16px;
+  background-color: rgb(162, 200, 36);
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.promo-button:hover {
+  background-color: rgb(140, 175, 32);
+}
