@@ -2,6 +2,7 @@ import './nav.css'
 import { useSelector } from 'react-redux'
 import { useState } from 'react'
 import CartPopup from '../../features/cart/CartPopup'
+import { Link } from "react-router-dom"
 
 export default function Nav() {
   const [showCart, setShowCart] = useState(false)
@@ -13,11 +14,11 @@ export default function Nav() {
     <div style={{ boxShadow: '0 2px rgba(0, 0, 0, .2)' }}>
       <div className="Nav-grid">
         <div className="Nav-left">
-          <a href="/" className="navleft-style">TiniJoy</a>
-          <a href="/catalog" className="navleft-style">Catalog</a>
-          <a href="/delivery" className="navleft-style">Delivery</a>
-          <a href="/about" className="navleft-style">About</a>
-          <a href="/contact" className="navleft-style">Contacts</a>
+          <Link to="/" className="navleft-style">TiniJoy</Link>
+          <Link to="/catalog" className="navleft-style">Catalog</Link>
+          <Link to="/delivery" className="navleft-style">Delivery</Link>
+          <Link to="/about" className="navleft-style">About</Link>
+          <Link to="/contact" className="navleft-style">Contacts</Link>
         </div>
 
         <div className="cart-container">
