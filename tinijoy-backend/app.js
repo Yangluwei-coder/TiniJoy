@@ -12,7 +12,7 @@ const app = express();
 //   origin: 'http://localhost:5173'
 // }));
 app.use(cors({
-  origin: ['http://localhost:5173', 'https://tinijoy.netlify.app'],
+  origin: ['http://localhost:5173', 'https://symphonious-croissant-df27d8.netlify.app'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
