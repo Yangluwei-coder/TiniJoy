@@ -6,12 +6,13 @@ import ProductTable from '../../components/Admin/ProductTable'
 
 export default function ProductPage() {
   const [products, setProducts] = useState([])
+  const API_URL = import.meta.env.VITE_API_URL;
 
   // 1. 获取所有商品
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get('/api/products')
+        const res = await axios.get(`${API_URL}/products`) 
         console.log('接口返回:', res.data)
 
         if (Array.isArray(res.data)) {
@@ -33,7 +34,7 @@ export default function ProductPage() {
   // 2. 添加商品
   const handleAdd = async (product) => {
     try {
-      const res = await axios.post('/api/products', product)
+      const res = await axios.post(`${API_URL}/products`, product)
       setProducts(prev => [...prev, res.data.product || res.data])
     } catch (err) {
       console.error('添加产品失败', err)
@@ -43,7 +44,7 @@ export default function ProductPage() {
   // 3. 删除商品
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`/api/products/${id}`)
+      await axios.delete(`${API_URL}/products/${id}`)
       setProducts(prev => prev.filter(p => p._id !== id))
     } catch (err) {
       console.error('删除产品失败', err)

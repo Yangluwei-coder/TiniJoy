@@ -7,12 +7,13 @@ import axios from 'axios'
 
 export default function UserPage() {
   const [admins, setAdmins] = useState([])
+  const API_URL = import.meta.env.VITE_API_URL;
 
   // 初始化：获取所有管理员
   useEffect(() => {
     const fetchAdmins = async () => {
       try {
-        const res = await axios.get('/api/admin')
+        const res = await axios.get(`${API_URL}/admin`)
         if (Array.isArray(res.data)) {
           setAdmins(res.data)
         } else {
@@ -30,8 +31,8 @@ export default function UserPage() {
   // 添加管理员
   const handleAdd = async (admin) => {
     try {
-      const res = await axios.post('http://localhost:5000/api/admin', admin) //请求
-      const res2 = await axios.get('/api/admin') //获取
+      const res = await axios.post(`${API_URL}/admin`, admin) //请求
+      const res2 = await axios.get(`${API_URL}/admin`) //获取
       setAdmins(res2.data)
       // setAdmins(prev => [...prev, res.data])
     } catch (err) {
@@ -42,7 +43,7 @@ export default function UserPage() {
   // 删除管理员
   const handleDelete = async (id) => {
     try {
-      const res = await axios.delete(`/api/admin/${id}`)
+      const res = await axios.delete(`${API_URL}/admin/${id}`)
       setAdmins(prev => prev.filter(admin => admin._id !== id))
     } catch (err) {
       console.error('删除管理员失败', err)

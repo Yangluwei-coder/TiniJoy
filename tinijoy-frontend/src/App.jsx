@@ -16,10 +16,6 @@ function App() {
     <BrowserRouter>
       <Links />
 
-      <Routes>
-        {/* 普通商城路由 */}
-        <Route path="/*" element={<Router />} />
-
         {/* 登录页 */}
         <Route
           path="/login"
@@ -53,6 +49,11 @@ function App() {
             )
           }
         />
+
+      <Routes>
+        {/* 普通商城路由 */}
+        <Route path="/*" element={<Router />} />
+
 
         {/* 兜底 */}
         <Route path="*" element={<Navigate to="/login" />} />

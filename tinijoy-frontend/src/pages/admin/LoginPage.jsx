@@ -15,11 +15,12 @@ export default function LoginPage() {
   const [error, setError] = useState('')
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const API_URL = import.meta.env.VITE_API_URL;
 
   const handleSubmit = async (e) => {
     e.preventDefault()  //阻止表单的默认提交行为（页面刷新），用axios发请求
     try {
-      const res = await axios.post('/api/admin/login', {
+      const res = await axios.post(`${API_URL}/admin/login`, {
         username,
         password,
       })
