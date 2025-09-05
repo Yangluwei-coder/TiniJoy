@@ -15,7 +15,7 @@ function App() {
   return (
     <BrowserRouter>
       <Links />
-
+      <Routes>
         {/* 登录页 */}
         <Route
           path="/login"
@@ -50,7 +50,7 @@ function App() {
           }
         />
 
-      <Routes>
+     
         {/* 普通商城路由 */}
         <Route path="/*" element={<Router />} />
 
