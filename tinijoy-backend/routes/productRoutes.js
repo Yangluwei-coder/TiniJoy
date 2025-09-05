@@ -4,7 +4,11 @@ const router = express.Router();
 const { createProduct, getProducts, updateProduct, deleteProduct } = require('../controllers/productController');
 
 router.post('/', createProduct);
-router.get('/', getProducts);
+// router.get('/', getProducts);
+router.get('/', (req, res) => {
+  console.log("GET /api/products 被调用了");
+  getProducts(req, res);
+});
 router.put('/:id', updateProduct);
 router.delete('/:id', deleteProduct);
 
