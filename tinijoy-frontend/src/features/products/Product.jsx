@@ -57,7 +57,7 @@ export default function Product() {
               Writing result-oriented ad copy is difficult, as it must appeal to, entice, and convince consumers to take action.
               There is no magic formula to write perfect ad copy. It is based on a number of factors.
             </p>
-            <p style={{ marginTop: '20px', fontSize: '22px', fontWeight: '500', color: 'rgb(162, 200, 36)' }}>{toy.price}</p>
+            <p style={{ marginTop: '20px', fontSize: '22px', fontWeight: '500', color: 'rgb(162, 200, 36)' }}>$ {toy.price}</p>
             <div style={{ display: 'flex', gap: '10px' }}>
               <input type="number" min="1" value={quantity} onChange={(e) => setQuantity(e.target.value)}className="number-input"/>
               <button className="add-button" onClick={handleAddToCart}>Add to Cart</button>
