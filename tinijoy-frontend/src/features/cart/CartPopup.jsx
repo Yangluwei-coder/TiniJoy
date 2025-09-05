@@ -1,22 +1,44 @@
 import './cart.css';
 import { useDispatch } from 'react-redux';
 import { removeFromCart, updateQuantity } from '../../store/cartSlice';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 export default function CartPopup({ cartItems, onClose }) {
   const dispatch = useDispatch();
+  const [serverCart, setServerCart] = useState([]);
 
-  const handleRemove = (id) => {
-    dispatch(removeFromCart(id));
-  };
+  const API_URL = import.meta.env.VITE_API_URL;
 
-  const handleQuantityChange = (id, value) => {
-    const quantity = parseInt(value, 10);
-    if (quantity >= 1) {
-      dispatch(updateQuantity({ id, quantity }));
+  // 同步本地 Redux 购物车到 serverCart (可选)
+  useEffect(() => {
+    setServerCart(cartItems);
+  }, [cartItems]);
+
+  // 移除商品
+  const handleRemove = async (id) => {
+    dispatch(removeFromCart(id)); // 更新 Redux
+    try {
+      await axios.delete(`${API_URL}/cart/${id}`); // 调用后端 API（可选）
+    } catch (err) {
+      console.error('Failed to remove item from server cart:', err);
     }
   };
 
-  const subtotal = cartItems.reduce(
+  // 更新数量
+  const handleQuantityChange = async (id, value) => {
+    const quantity = parseInt(value, 10);
+    if (quantity >= 1) {
+      dispatch(updateQuantity({ id, quantity })); // 更新 Redux
+      try {
+        await axios.put(`${API_URL}/cart/${id}`, { quantity }); // 调用后端 API（可选）
+      } catch (err) {
+        console.error('Failed to update item quantity on server:', err);
+      }
+    }
+  };
+
+  const subtotal = serverCart.reduce(
     (total, item) => total + item.price * item.quantity,
     0
   );
@@ -28,14 +50,15 @@ export default function CartPopup({ cartItems, onClose }) {
       <div className="cart-popup">
         <div className="cart-close" onClick={onClose}>×</div>
         <div className="cart-header">Your Cart</div>
-        {cartItems.length === 0 ? (
+
+        {serverCart.length === 0 ? (
           <div style={{ alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
             <div className="empty-cart">No item found</div>
           </div>
         ) : (
           <>
             <div className="cart-items">
-              {cartItems.map(item => (
+              {serverCart.map(item => (
                 <div key={item.id} className="cart-item">
                   <img src={item.image} className="cart-thumb" alt={item.name} />
                   <div className="cart-info">
@@ -56,10 +79,12 @@ export default function CartPopup({ cartItems, onClose }) {
                 </div>
               ))}
             </div>
+
             <div className="cart-subtotal">
               <span>Subtotal</span>
               <span style={{ fontWeight: '600' }}>${subtotal.toFixed(2)} USD</span>
             </div>
+
             <div style={{ alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
               <button className="checkout-button">Continue to Checkout</button>
             </div>
