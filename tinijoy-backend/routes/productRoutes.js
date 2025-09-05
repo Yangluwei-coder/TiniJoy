@@ -1,14 +1,11 @@
 //把前端请求分发给对应的productController函数
 const express = require('express');
 const router = express.Router();
-const { createProduct, getProducts, updateProduct, deleteProduct } = require('../controllers/productController');
+const { createProduct, getProducts, updateProduct, deleteProduct, getProductById } = require('../controllers/productController');
 
+router.get('/:id', getProductById);
+router.get('/', getProducts);
 router.post('/', createProduct);
-// router.get('/', getProducts);
-router.get('/', (req, res) => {
-  console.log("GET /api/products 被调用了");
-  getProducts(req, res);
-});
 router.put('/:id', updateProduct);
 router.delete('/:id', deleteProduct);
 
