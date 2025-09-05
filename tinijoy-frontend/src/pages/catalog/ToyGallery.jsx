@@ -30,7 +30,7 @@ export default function ToyGallery({
   useEffect(() => {
     setFilter(initialFilter);
   }, [initialFilter]);
-  
+
   console.log("API_URL in ToyGallery:", API_URL);
   useEffect(() => {
     // 安全加载数据
@@ -95,7 +95,7 @@ export default function ToyGallery({
             <ToyCard
               key={toy._id}
               toy={toy}
-              onClick={() => navigate(`/product/${toy.id}`)}
+              onClick={() => navigate(`/product/${toy._id}`)}
             />
           ))}
         </div>

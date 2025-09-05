@@ -19,7 +19,7 @@ export default function Product() {
   const cartItems = useSelector(state => state.cart.items);
 
   useEffect(() => {
-    axios.get(`${API_URL}/products/${_id}`)
+    axios.get(`${API_URL}/products/${id}`)
       .then(res => setToy(res.data))
       .catch(err => console.error('Failed to fetch product:', err));
   }, [id, API_URL]);
