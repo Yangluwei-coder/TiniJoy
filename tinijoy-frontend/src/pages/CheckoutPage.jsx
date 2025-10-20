@@ -6,6 +6,9 @@ import axios from 'axios';
 
 export default function CheckoutPage() {
   const { cartItems = [], totalPrice = 0 } = useSelector((state) => state.cart || {});
+  console.log("🛒 Redux state.cart:", useSelector((state) => state.cart));
+  console.log("🧾 cartItems from Redux:", cartItems);
+  console.log("💰 totalPrice from Redux:", totalPrice);   
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [serverCart, setServerCart] = useState(cartItems || []);
@@ -14,6 +17,7 @@ export default function CheckoutPage() {
   // 同步 Redux → state
   useEffect(() => {
     setServerCart(cartItems || []);
+    console.log("🔄 Updating serverCart with:", cartItems);
   }, [cartItems]);
 
   const handleRemove = async (id) => {
@@ -55,6 +59,7 @@ export default function CheckoutPage() {
       </div>
     );
   }
+  
 
   return (
     <div className="checkout-page">

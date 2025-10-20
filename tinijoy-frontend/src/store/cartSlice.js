@@ -9,7 +9,10 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
+    
     addToCart: (state, action) => {
+      console.log("🧩 [Reducer Triggered]", action.type, "Payload:", action.payload);
+      console.log("📦 Current cartItems before reduce:", state.cartItems);
       const item = action.payload;
       const existingItem = state.cartItems.find(i => i.id === item.id);
       if (existingItem) {
@@ -26,6 +29,8 @@ const cartSlice = createSlice({
     },
 
     removeFromCart: (state, action) => {
+      console.log("🧩 [Reducer Triggered]", action.type, "Payload:", action.payload);
+      console.log("📦 Current cartItems before reduce:", state.cartItems);
       state.cartItems = state.cartItems.filter(
         item => item.id !== action.payload
       );
@@ -38,6 +43,8 @@ const cartSlice = createSlice({
     },
 
     updateQuantity: (state, action) => {
+      console.log("🧩 [Reducer Triggered]", action.type, "Payload:", action.payload);
+console.log("📦 Current cartItems before reduce:", state.cartItems);
       const { id, quantity } = action.payload;
       const existingItem = state.cartItems.find(item => item.id === id);
       if (existingItem) {
@@ -45,10 +52,9 @@ const cartSlice = createSlice({
       }
 
       // totalPrice
-      state.totalPrice = state.cartItems.reduce(
-        (sum, i) => sum + i.price * i.quantity,
-        0
-      );
+      state.totalPrice = (Array.isArray(state.cartItems) ? state.cartItems : [])
+  .reduce((sum, i) => sum + (i?.price || 0) * (i?.quantity || 0), 0);
+
     },
   },
 });
