@@ -5,15 +5,16 @@ import { removeFromCart, updateQuantity } from '../../store/cartSlice';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-export default function CartPopup({ cartItems, onClose }) {
+export default function CartPopup({onClose }) {
   const dispatch = useDispatch();
-  const [serverCart, setServerCart] = useState([]);
   const navigate = useNavigate();
   const API_URL = import.meta.env.VITE_API_URL;
+  const cartItems = useSelector((state) => state.cart.cartItems || []);
+  const [serverCart, setServerCart] = useState(cartItems);
 
   // 同步本地 Redux 购物车到 serverCart (可选)
   useEffect(() => {
-    setServerCart(cartItems);
+    setServerCart(Array.isArray(cartItems) ? cartItems : []);
   }, [cartItems]);
 
   // 移除商品
@@ -39,10 +40,12 @@ export default function CartPopup({ cartItems, onClose }) {
     }
   };
 
-  const subtotal = serverCart.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  );
+  const subtotal = Array.isArray(serverCart)
+    ? serverCart.reduce(
+        (total, item) => total + (item?.price ?? 0) * (item?.quantity ?? 0),
+        0
+      )
+    : 0;
 
   const handleCheckout = () => {
     onClose();          // 关闭弹窗
