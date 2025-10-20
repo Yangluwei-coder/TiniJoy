@@ -1,6 +1,6 @@
 import './cart.css';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { removeFromCart, updateQuantity } from '../../store/cartSlice';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
