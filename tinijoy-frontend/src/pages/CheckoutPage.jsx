@@ -3,18 +3,17 @@ import { useSelector, useDispatch } from 'react-redux';
 import { removeFromCart, updateQuantity } from '../store/cartSlice';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-// import './checkout.css';
 
 export default function CheckoutPage() {
-  const { cartItems, totalPrice } = useSelector((state) => state.cart);
+  const { cartItems = [], totalPrice = 0 } = useSelector((state) => state.cart || {});
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [serverCart, setServerCart] = useState(cartItems);
+  const [serverCart, setServerCart] = useState(cartItems || []);
   const API_URL = import.meta.env.VITE_API_URL;
 
   // 同步 Redux → state
   useEffect(() => {
-    setServerCart(cartItems);
+    setServerCart(cartItems || []);
   }, [cartItems]);
 
   const handleRemove = async (id) => {
@@ -38,17 +37,17 @@ export default function CheckoutPage() {
     }
   };
 
-  const subtotal = serverCart.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  );
+  // 防止 undefined.reduce
+  const subtotal = Array.isArray(serverCart)
+    ? serverCart.reduce((total, item) => total + item.price * item.quantity, 0)
+    : 0;
 
   const handlePlaceOrder = () => {
     alert('Order placed successfully!');
     navigate('/');
   };
 
-  if (serverCart.length === 0) {
+  if (!Array.isArray(serverCart) || serverCart.length === 0) {
     return (
       <div className="checkout-empty">
         <h2>Your cart is empty</h2>
