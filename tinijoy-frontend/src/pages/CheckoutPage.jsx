@@ -1,123 +1,123 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeFromCart, updateQuantity } from '../store/cartSlice';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import './checkout.css';
 
 export default function CheckoutPage() {
   const { cartItems = [], totalPrice = 0 } = useSelector((state) => state.cart || {});
-  console.log("🛒 Redux state.cart:", useSelector((state) => state.cart));
-  console.log("🧾 cartItems from Redux:", cartItems);
-  console.log("💰 totalPrice from Redux:", totalPrice);   
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [serverCart, setServerCart] = useState(cartItems || []);
-  const API_URL = import.meta.env.VITE_API_URL;
 
-  // 同步 Redux → state
-  useEffect(() => {
-    setServerCart(cartItems || []);
-    console.log("🔄 Updating serverCart with:", cartItems);
-  }, [cartItems]);
+  // 数量调整
+  const handleQuantityChange = (id, type) => {
+    const currentItem = cartItems.find((item) => item.id === id);
+    if (!currentItem) return;
+    const newQuantity = type === 'increase'
+      ? currentItem.quantity + 1
+      : Math.max(1, currentItem.quantity - 1);
+    dispatch(updateQuantity({ id, quantity: newQuantity }));
+  };
 
-  const handleRemove = async (id) => {
+  // 移除商品
+  const handleRemove = (id) => {
     dispatch(removeFromCart(id));
-    try {
-      await axios.delete(`${API_URL}/cart/${id}`);
-    } catch (err) {
-      console.error('Failed to remove item from server:', err);
-    }
   };
 
-  const handleQuantityChange = async (id, value) => {
-    const quantity = parseInt(value, 10);
-    if (quantity >= 1) {
-      dispatch(updateQuantity({ id, quantity }));
-      try {
-        await axios.put(`${API_URL}/cart/${id}`, { quantity });
-      } catch (err) {
-        console.error('Failed to update quantity:', err);
-      }
-    }
-  };
-
-  // 防止 undefined.reduce
-  const subtotal = Array.isArray(serverCart)
-    ? serverCart.reduce((total, item) => total + item.price * item.quantity, 0)
-    : 0;
-
-  const handlePlaceOrder = () => {
-    alert('Order placed successfully!');
-    navigate('/');
-  };
-
-  if (!Array.isArray(serverCart) || serverCart.length === 0) {
+  // 空购物车显示
+  if (!Array.isArray(cartItems) || cartItems.length === 0) {
     return (
-      <div className="checkout-empty">
+      <div className="empty-cart">
         <h2>Your cart is empty</h2>
-        <button onClick={() => navigate('/')}>Back to Shop</button>
+        <button className="back-button" onClick={() => navigate('/')}>
+          Back to Shop
+        </button>
       </div>
     );
   }
-  
 
+  // 页面主内容
   return (
-    <div className="checkout-page">
-      <h2 className="checkout-title">Checkout</h2>
+    <div className="checkout-container">
+      <div className="breadcrumb">
+        <span className="breadcrumb-link" onClick={() => navigate('/')}>Home</span>
+        <span> &gt; </span>
+        <span className="breadcrumb-link active">Shopping Cart</span>
+      </div>
 
-      <table className="checkout-table">
-        <thead>
-          <tr>
-            <th>Product</th>
-            <th>Unit Price</th>
-            <th>Qty</th>
-            <th>Subtotal</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {serverCart.map((item) => (
-            <tr key={item.id}>
-              <td className="checkout-product">
-                <img src={item.image} alt={item.name} className="checkout-thumb" />
-                <span>{item.name}</span>
-              </td>
-              <td>${item.price.toFixed(2)}</td>
-              <td>
-                <input
-                  type="number"
-                  min="1"
-                  value={item.quantity}
-                  onChange={(e) => handleQuantityChange(item.id, e.target.value)}
-                  className="checkout-input"
-                />
-              </td>
-              <td>${(item.price * item.quantity).toFixed(2)}</td>
-              <td>
-                <button
-                  className="checkout-remove"
-                  onClick={() => handleRemove(item.id)}
-                >
-                  Remove
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className="page-width">
+        <div className="checkout-layout">
+          {/* 左侧表格 */}
+          <div className="cart-section">
+            <table className="items-table">
+              <thead>
+                <tr>
+                  <th>PRODUCT</th>
+                  <th>PRICE</th>
+                  <th>QUANTITY</th>
+                  <th>TOTAL</th>
+                </tr>
+              </thead>
+              <tbody>
+                {cartItems.map((item) => (
+                  <tr key={item.id}>
+                    <td>
+                      <div className="product-info">
+                        <img src={item.image} alt={item.name} className="product-image" />
+                        <div>
+                          <div className="product-name">{item.name}</div>
+                          {item.color && <div>Color: {item.color}</div>}
+                          {item.size && <div>Size: {item.size}</div>}
+                          <button
+                            className="remove-btn"
+                            onClick={() => handleRemove(item.id)}
+                          >
+                            Remove
+                          </button>
+                        </div>
+                      </div>
+                    </td>
+                    <td>${parseFloat(item.price).toFixed(2)}</td>
+                    <td>
+                      <div className="qty-controls">
+                        <button onClick={() => handleQuantityChange(item.id, 'decrease')}>-</button>
+                        <input type="text" value={item.quantity} readOnly />
+                        <button onClick={() => handleQuantityChange(item.id, 'increase')}>+</button>
+                      </div>
+                    </td>
+                    <td>${(item.price * item.quantity).toFixed(2)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
 
-      <div className="checkout-summary">
-        <div className="summary-item">
-          <span>Subtotal:</span>
-          <span>${subtotal.toFixed(2)}</span>
+            {/* 优惠码 */}
+            <div className="promo-section">
+              <p>Promotion code?</p>
+              <div className="promo-input">
+                <input type="text" placeholder="Enter coupon code" />
+                <button className="apply-btn">Apply</button>
+              </div>
+            </div>
+          </div>
+
+          {/* 右侧订单汇总 */}
+          <div className="summary-section">
+            <h3>Order Summary</h3>
+            <div className="summary-row">
+              <span>Subtotal</span>
+              <span>${totalPrice.toFixed(2)}</span>
+            </div>
+            <div className="summary-row total">
+              <div>
+                <strong>Total</strong>
+                <div className="tax-note">(Inclusive of tax $0.00)</div>
+              </div>
+              <strong>${totalPrice.toFixed(2)}</strong>
+            </div>
+            <button className="checkout-btn">CHECKOUT</button>
+          </div>
         </div>
-        <div className="summary-item total">
-          <span>Total (USD):</span>
-          <span>${subtotal.toFixed(2)}</span>
-        </div>
-        <button className="place-order-button" onClick={handlePlaceOrder}>
-          Place Order
-        </button>
       </div>
     </div>
   );
