@@ -6,7 +6,7 @@ import axios from 'axios';
 // import './checkout.css';
 
 export default function CheckoutPage() {
-  const { cartItems } = useSelector((state) => state.cart);
+  const { cartItems, totalPrice } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [serverCart, setServerCart] = useState(cartItems);
