@@ -1,14 +1,19 @@
-import './nav.css'
-import { useSelector } from 'react-redux'
-import { useState } from 'react'
-import CartPopup from '../../features/cart/CartPopup'
-import { Link } from "react-router-dom"
+import './nav.css';
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
+import CartPopup from '../../features/cart/CartPopup';
+import { Link } from 'react-router-dom';
 
 export default function Nav() {
-  const [showCart, setShowCart] = useState(false)
+  const [showCart, setShowCart] = useState(false);
 
-  const cartItems = useSelector((state) => state.cart.items)
-  const itemCount = cartItems.reduce((total, item) => total + item.quantity, 0)
+  // ✅ 修复：正确从 state.cart.cartItems 读取
+  const cartItems = useSelector((state) => state.cart.cartItems || []);
+
+  // ✅ 防御性 reduce，避免 undefined 报错
+  const itemCount = Array.isArray(cartItems)
+    ? cartItems.reduce((total, item) => total + (item?.quantity || 0), 0)
+    : 0;
 
   return (
     <div style={{ boxShadow: '0 2px rgba(0, 0, 0, .2)' }}>
@@ -23,7 +28,11 @@ export default function Nav() {
 
         <div className="cart-container">
           <p>Cart</p>
-          <div className="cart-link" onClick={() => setShowCart(true)} style={{ cursor: 'pointer' }}>
+          <div
+            className="cart-link"
+            onClick={() => setShowCart(true)}
+            style={{ cursor: 'pointer' }}
+          >
             <div className="cart-icon-wrapper">
               <svg
                 className="cart-icon"
@@ -47,7 +56,9 @@ export default function Nav() {
         </div>
       </div>
 
-      {showCart && <CartPopup cartItems={cartItems} onClose={() => setShowCart(false)} />}
+      {showCart && (
+        <CartPopup cartItems={cartItems} onClose={() => setShowCart(false)} />
+      )}
     </div>
-  )
+  );
 }

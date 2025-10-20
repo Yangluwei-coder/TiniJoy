@@ -11,6 +11,9 @@ const cartSlice = createSlice({
   reducers: {
     
     addToCart: (state, action) => {
+      state.totalPrice = Array.isArray(state.cartItems)
+  ? state.cartItems.reduce((sum, i) => sum + (i?.price || 0) * (i?.quantity || 0), 0)
+  : 0;
       console.log("🧩 [Reducer Triggered]", action.type, "Payload:", action.payload);
       console.log("📦 Current cartItems before reduce:", state.cartItems);
       const item = action.payload;
@@ -29,6 +32,9 @@ const cartSlice = createSlice({
     },
 
     removeFromCart: (state, action) => {
+      state.totalPrice = Array.isArray(state.cartItems)
+  ? state.cartItems.reduce((sum, i) => sum + (i?.price || 0) * (i?.quantity || 0), 0)
+  : 0;
       console.log("🧩 [Reducer Triggered]", action.type, "Payload:", action.payload);
       console.log("📦 Current cartItems before reduce:", state.cartItems);
       state.cartItems = state.cartItems.filter(
@@ -43,6 +49,9 @@ const cartSlice = createSlice({
     },
 
     updateQuantity: (state, action) => {
+      state.totalPrice = Array.isArray(state.cartItems)
+  ? state.cartItems.reduce((sum, i) => sum + (i?.price || 0) * (i?.quantity || 0), 0)
+  : 0;
       console.log("🧩 [Reducer Triggered]", action.type, "Payload:", action.payload);
 console.log("📦 Current cartItems before reduce:", state.cartItems);
       const { id, quantity } = action.payload;
