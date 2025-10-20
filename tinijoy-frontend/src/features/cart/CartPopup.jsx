@@ -1,4 +1,5 @@
 import './cart.css';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { removeFromCart, updateQuantity } from '../../store/cartSlice';
 import axios from 'axios';
@@ -7,7 +8,7 @@ import { useEffect, useState } from 'react';
 export default function CartPopup({ cartItems, onClose }) {
   const dispatch = useDispatch();
   const [serverCart, setServerCart] = useState([]);
-
+  const navigate = useNavigate();
   const API_URL = import.meta.env.VITE_API_URL;
 
   // 同步本地 Redux 购物车到 serverCart (可选)
@@ -42,6 +43,11 @@ export default function CartPopup({ cartItems, onClose }) {
     (total, item) => total + item.price * item.quantity,
     0
   );
+
+  const handleCheckout = () => {
+    onClose();          // 关闭弹窗
+    navigate('/checkout'); // 跳转到结账页
+  };
 
   return (
     <>
@@ -86,7 +92,7 @@ export default function CartPopup({ cartItems, onClose }) {
             </div>
 
             <div style={{ alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
-              <button className="checkout-button">Continue to Checkout</button>
+              <button className="checkout-button" onClick={handleCheckout}>Continue to Checkout</button>
             </div>
           </>
         )}

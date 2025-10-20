@@ -11,6 +11,7 @@ import Delivery from '../pages/delivery/Delivery.jsx';
 import About from '../pages/about/About.jsx';
 import Contact from '../pages/contact/Contact.jsx';
 import ToyGallery from '../pages/catalog/ToyGallery.jsx';
+import CheckoutPage from '../pages/CheckoutPage.jsx';
 
 const routerList = [
     {
@@ -64,6 +65,10 @@ const routerList = [
             {
                 path:'contact',
                 element:<Contact/>
+            },
+            {
+                path:'checkout',
+                element:<CheckoutPage/>
             },
         ]
     },
