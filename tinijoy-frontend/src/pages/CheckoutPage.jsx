@@ -93,7 +93,7 @@ export default function CheckoutPage() {
 
             {/* 优惠码 */}
             <div className="promo-section">
-              <p>Promotion code?</p>
+              <p style={{marginLeft:'20px', width:'150px'}}>Promotion code?</p>
               <div className="promo-input">
                 <input type="text" placeholder="Enter coupon code" />
                 <button className="apply-btn">Apply</button>

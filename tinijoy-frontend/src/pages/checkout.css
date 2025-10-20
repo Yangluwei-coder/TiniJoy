@@ -1,16 +1,15 @@
 .checkout-container {
-  display: flex;
-  justify-content: center;
+  
   padding: 2rem 0;
   font-family: 'Inter', sans-serif;
   background-color: #fff;
   min-height: 500px;
 }
 .page-width {
-  width: 100%;
-  max-width: 1200px; 
-  margin: 0 auto;
-  padding: 0 1rem;   
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 1rem; 
 }
 .breadcrumb {
   margin-bottom: 1rem;
@@ -106,6 +105,12 @@
 
 .promo-section {
   margin-top: 2rem;
+  width: 75%;
+    max-width: 700px;
+    height: 100px;
+    display: flex
+;
+    justify-content: center;
 }
 
 .promo-input {
